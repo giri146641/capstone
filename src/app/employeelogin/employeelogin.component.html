@@ -1,0 +1,17 @@
+<h2>Welcome to Employee portal</h2>
+<table>
+    <label for="adminid">EmployeeID</label>
+    <br>
+    <input type="text" placeholder="enter your ID" id="adminid" [(ngModel)]="EmpId" name="EmpId" required>
+    <br>    
+    <label for="uname">Username</label>
+    <br>
+    <input type="text" placeholder="enter your username" id="uname" [(ngModel)]="username" name="username" required>
+    <br>
+    <label for="pass">Password</label>
+    <br>
+    <input type="text" placeholder="enter password"id="pass"[(ngModel)]="password" type="password" name="password" required>
+    </table>
+<button type="button" (click)="login()">EmployeeLogin</button>
+<button type="button" (click)="adminlogin()">AdminLogin</button>
+

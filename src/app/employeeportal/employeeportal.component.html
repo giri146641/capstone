@@ -1,0 +1,17 @@
+<h2>
+    Employee Survey Form
+</h2>
+<form [formGroup]="form" (ngSubmit)="submit()">
+   
+    <div *ngFor="let question of questions; let i=index">
+        <div *ngFor='let ques of question.questions'>
+            {{i+1}}.{{ques.question_value}}
+        </div>
+        <div *ngFor='let answer of question.answers;let i = index'>
+            <input type="radio" [checked]="answer.is_selected"
+                (click)='radioChecked(question.questions,answer.answerId)'>
+            <label>{{answer.answer}}</label>
+        </div>
+    </div>
+    <button class="btn btn-primary">save</button>
+</form>
