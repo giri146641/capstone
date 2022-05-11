@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import {FormGroup, FormBuilder, FormControl} from '@angular/forms'
 import { Organization } from 'src/app/model/organization';
 import { OrganizationService } from 'src/app/service/organization.service';
+import { Router } from '@angular/router';
+
+export class CsvData {
+  public empid: any;
+  public empname: any;
+  public companyName: any;
+  public address: any;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +22,11 @@ export class DashboardComponent implements OnInit {
   orgDetail !: FormGroup;
   orgObj : Organization = new Organization();
   orgList : Organization[] = []; 
+  public records: any[] = [];
+  @ViewChild('csvReader') csvReader: any;
   
 
-  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService) { }
+  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService ,private route: Router) { }
 
   ngOnInit(): void {
 
@@ -95,10 +105,69 @@ export class DashboardComponent implements OnInit {
 
     }
 
-    
-      
-      
+    uploadListener($event: any): void {
 
+      let text = [];
+      let files = $event.srcElement.files;
+  
+      if (this.isValidCSVFile(files[0])) {
+  
+        let input = $event.target;
+        let reader = new FileReader();
+        reader.readAsText(input.files[0]);
+  
+        reader.onload = () => {
+          let csvData = reader.result;
+          let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
+  
+          let headersRow = this.getHeaderArray(csvRecordsArray);
+  
+          this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        };
+  
+        reader.onerror = function () {
+          console.log('error is occured while reading file!');
+        };
+  
+      }
+    }
+
+    getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
+      let csvArr = [];
+  
+      for (let i = 1; i < csvRecordsArray.length; i++) {
+        let curruntRecord = (<string>csvRecordsArray[i]).split(',');
+        if (curruntRecord.length == headerLength) {
+          let csvRecord: CsvData = new CsvData();
+          csvRecord.empid = curruntRecord[0].trim();
+          csvRecord.empname = curruntRecord[1].trim();
+          csvRecord.companyName = curruntRecord[2].trim();
+          csvRecord.address = curruntRecord[3].trim();
+          csvArr.push(csvRecord);
+        }
+      }
+      return csvArr;
+    }
+
+  //check etension
+  isValidCSVFile(file: any) {
+    return file.name.endsWith(".csv");
+  }
+
+  getHeaderArray(csvRecordsArr: any) {
+    let headers = (<string>csvRecordsArr[0]).split(',');
+    let headerArray = [];
+    for (let j = 0; j < headers.length; j++) {
+      headerArray.push(headers[j]);
+    }
+    return headerArray;
+  }
+
+  EmpInfo(){
+    this.route.navigateByUrl('empInfo');
+  }
+
+  
   }
 
 
