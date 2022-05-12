@@ -18,19 +18,21 @@ export class CsvData {
 })
 export class DashboardComponent implements OnInit {
 
-  Organization : any;
   orgDetail !: FormGroup;
   orgObj : Organization = new Organization();
   orgList : Organization[] = []; 
   public records: any[] = [];
   @ViewChild('csvReader') csvReader: any;
+  name : any;
   
-
-  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService ,private route: Router) { }
+  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService ,private route: Router) { 
+    this.orgList = [],
+    this.getAllOrganization()
+  }
 
   ngOnInit(): void {
 
-    this.getAllOrganization();
+    this.getAllOrganization()
     this.orgDetail = this.formBuilder.group({
       name : [''],
       id : [''],
@@ -41,6 +43,14 @@ export class DashboardComponent implements OnInit {
   });
     
   }
+
+  // addDemoOrganization(){
+  //   this.orgList=[
+  //     {id:108,name:"Mercer",domain:"Insurance",city:"Pune",pincode:491001},
+  //     {id:121,name:"HDFC Bank",domain:"Banking",city:"Mumbai",pincode:43210},
+  //     {id:199,name:"Infosys",domain:"Tech",city:"Banglore",pincode:472261},
+  //   ]
+  // }
 
   addOrganization(){
 
@@ -54,12 +64,12 @@ export class DashboardComponent implements OnInit {
     this.orgService.addOrganization(this.orgObj).subscribe(res=>{
       console.log(res);
       this.getAllOrganization();
+      this.orgDetail.reset();
     },err=>{
       console.log(err);
     });
 
   }
-
 
   getAllOrganization() {
     this.orgService.getAllOrganization().subscribe(res=>{
@@ -77,13 +87,13 @@ export class DashboardComponent implements OnInit {
     this.orgDetail.controls['pincode'].setValue(org.pincode);
   }
 
-  updateOrganization(){
+  updateOrganization() {
 
     this.orgObj.id = this.orgDetail.value.id;
     this.orgObj.name = this.orgDetail.value.name;
     this.orgObj.domain = this.orgDetail.value.domain;
     this.orgObj.city = this.orgDetail.value.city;
-    this.orgObj.pincode = this.orgDetail.value.pincode; 
+    this.orgObj.pincode = this.orgDetail.value.pincode;
 
     this.orgService.updateOrganization(this.orgObj).subscribe(res=>{
       console.log(res);
@@ -99,9 +109,10 @@ export class DashboardComponent implements OnInit {
       this.orgService.deleteOrganization(org).subscribe(res=>{
         console.log(res);
         alert('Organization deleted succesfully')
+        this.getAllOrganization();
       },err => {
         console.log(err);
-      })
+      });
 
     }
 
@@ -166,6 +177,18 @@ export class DashboardComponent implements OnInit {
   EmpInfo(){
     this.route.navigateByUrl('empInfo');
   }
+
+  Search(){
+    if(this.name == ""){
+      this.ngOnInit()
+    } else {
+      this.orgList = this.orgList.filter(res =>{
+        return res.name.toLowerCase().match(this.name.toLocaleLowerCase());
+      } ) 
+    }
+  }
+
+
 
   
   }

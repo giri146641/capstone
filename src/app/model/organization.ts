@@ -1,4 +1,5 @@
 export class Organization {
+    // [x: string]: any;
     id : number=0;
     name : string='';
     domain : string='';

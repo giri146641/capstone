@@ -1,7 +1,55 @@
 <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Employee Info</a>
-        </div>
-      </nav>
-    </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Employee Details</a>
+      </div>
+  </nav>
+
+    
+    <table class="table table-bordered">
+      <thead class="table table-bordered table-dark">
+        <tr>
+          <th scope="col">User Name</th>
+          <th scope="col">Password</th>
+          <th scope="col">Organization Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Date of Birth</th>
+          <th scope="col">Contact Number</th>
+          <th scope="col">City</th>
+          <th scope="col">Designation</th>
+          <th scope="col">Pan Number</th>
+          <th scope="col">Status</th>
+          <th scope="col">Response</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of empList">
+          <td>{{ emp.username }}</td>
+          <td>{{ emp.password }}</td>
+          <td>{{ emp.orgname }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.gender }}</td>
+          <td>{{ emp.dob }}</td>
+          <td>{{ emp.contactno }}</td>
+          <td>{{ emp.city }}</td>
+          <td>{{ emp.designation }}</td>
+          <td>{{ emp.pan }}</td>
+          <td>
+            <div class="btn-group" (click)="onButtonGroupClick($event)">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <p>
+                  <input type="radio" value="active" name="statusActive"> Active
+                  <input type="radio" value="inactive" name="statusInactive"> Inactive
+               </p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <a href="" button type="button" class="btn btn-primary">View Response</a>
+          </td>
+        </tr>         
+      </tbody>
+    </table>
+
+</div>
