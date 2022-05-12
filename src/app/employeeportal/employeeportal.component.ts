@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeresponsesService } from '../services/employeeresponses.service';
+import { EmployeedetailsService } from '../services/employeedetails.service';
 import { EmployeeResponse } from '../models/EmployeeResponse';
 import { first } from 'rxjs';
 import { Router } from '@angular/router';
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
 })
 export class EmployeeportalComponent implements OnInit {
   form: FormGroup;
-  userId:number=1002;
+  employeeData:any ;
+  userId:number | undefined;
   questions: any = [
     {
       questions: [{ question_value: 'What do you think about our company culture?', questionId: 1 }], answers: [{ answerId: 1, answer: 'Average', is_selected: true },
@@ -55,6 +57,7 @@ export class EmployeeportalComponent implements OnInit {
 
   constructor(fb: FormBuilder,
     private response: EmployeeresponsesService,
+    private empdetails: EmployeedetailsService,
     private route: Router) {
     this.form = fb.group({
       questions: [null, Validators.required]
@@ -86,13 +89,16 @@ export class EmployeeportalComponent implements OnInit {
     })
   }
   ngOnInit(): void {
-
+    this.empdetails.getEmployeeData().subscribe((data)=>{
+      this.employeeData = data;
+      console.log(this.employeeData);
+  });
   }
   submit() {
     console.log(this.form);
     
     let user = new EmployeeResponse();
-    user.userId=this.userId;
+    user.userId=this.employeeData.userId;
     this.questions.forEach((question: { questions: { question_value: any; questionId: any; }[]; answers: { is_selected: any; answer: any; answerId: any }[]; }) => {
       //console.log(question.questions);
       question.questions.forEach((quest: { question_value: any; questionId: any; }) => {
