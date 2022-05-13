@@ -7,7 +7,7 @@ import { SurveySummaryComponent } from './survey-summary/survey-summary.componen
 import { ViewResponseComponent } from './view-response/view-response.component';
 
 const routes: Routes = [
-    {path:'dashboard',component:DashboardComponent},
+    {path:'',component:DashboardComponent},
     {path:'empInfo',component:EmpInfoComponent},
     {path:'',component:AdminDashboardComponent},
     {path:'SurveySummary',component:SurveySummaryComponent},
