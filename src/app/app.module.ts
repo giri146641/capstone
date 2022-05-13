@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { EmployeesurveyComponent } from './employeesurvey/employeesurvey.component';
 
 
 
@@ -23,7 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
     AdminloginComponent,
     OrganizationComponent,
     EmployeeloginComponent,
-    EmployeeportalComponent
+    EmployeeportalComponent,
+    EmployeesurveyComponent,
+    AdminloginComponent
   ],
   imports: [
     BrowserModule,

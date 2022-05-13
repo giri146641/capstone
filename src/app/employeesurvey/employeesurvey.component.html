@@ -1,0 +1,122 @@
+<h2>Employee Survey Form</h2>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <form [formGroup]="employeesurveyForm" (ngSubmit)="onSubmit()">
+            
+            <div class="form-group">
+                <label for="question1">1.What do you think about our company culture?</label>
+                <div>
+                <input id="excellent" type="radio" value="excellent" name="question1" formControlName="question1">
+                <label for="excellent">Excellent</label>
+                </div>
+                <div>
+                <input id="verygood" type="radio" value="verygood" name="question1" formControlName="question1">
+                <label for="verygood">VeryGood</label>
+                </div>
+                <div>       
+                <input id="good" type="radio" value="good" name="question1" formControlName="question1">
+                <label for="good">Good</label>
+                </div>
+                <div>
+                <input id="average" type="radio" value="average" name="question1" formControlName="question1">
+                <label for="average">Average</label>
+                </div>
+                </div>
+                <div *ngIf="submitted && this.employeesurveyForm.controls['question1'].errors" class="invalid-feedback">
+                <div *ngIf="this.employeesurveyForm.controls['question1'].errors['required']">Field is required</div>
+                </div>
+            <br>
+            <div class="form-group">
+                <label for="question2">2.What do you think about payroll?</label>
+                <div>
+                <input id="excellent" type="checkbox" value="excellent" name="question2" formControlName="question2">
+                <label for="excellent">Right</label>
+                </div>
+                <div>
+                <input id="verygood" type="checkbox" value="verygood" name="question2" formControlName="question2">
+                <label for="verygood">Wrong</label>
+                </div>  
+            </div>
+            <div *ngIf="submitted && this.employeesurveyForm.controls['question2'].errors" class="invalid-feedback">
+            <div *ngIf="this.employeesurveyForm.controls['question2'].errors['required']">Field is required</div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="question3">3.What do you think about our company benfites regarding insurance?</label>
+                <div>
+                <input id="excellent" type="radio" value="excellent" name="question3" formControlName="question3">
+                <label for="excellent">Excellent</label>
+                </div>
+                <div>
+                <input id="verygood" type="radio" value="verygood" name="question3" formControlName="question3">
+                <label for="verygood">VeryGood</label>
+                </div>
+                <div>       
+                <input id="good" type="radio" value="good" name="question3" formControlName="question3">
+                <label for="good">Good</label>
+                </div>
+                <div>
+                <input id="average" type="radio" value="average" name="question3" formControlName="question3">
+                <label for="average">Average</label>
+                </div>
+            </div>
+            <div *ngIf="submitted && this.employeesurveyForm.controls['question3'].errors" class="invalid-feedback">
+            <div *ngIf="this.employeesurveyForm.controls['question3'].errors['required']">Field is required</div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="question4">4.What do you think about our company infrastructure</label>
+                <div>
+                <input id="excellent" type="radio" value="excellent" name="question4" formControlName="question4">
+                <label for="excellent">Excellent</label>
+                </div>
+                <div>
+                <input id="verygood" type="radio" value="verygood" name="question4" formControlName="question4">
+                <label for="verygood">VeryGood</label>
+                </div>
+                <div>       
+                <input id="good" type="radio" value="good" name="question4" formControlName="question4">
+                <label for="good">Good</label>
+                </div>
+                <div>
+                <input id="average" type="radio" value="average" name="question4" formControlName="question4">
+                <label for="average">Average</label>
+                </div>
+                </div>
+                <div *ngIf="submitted && this.employeesurveyForm.controls['question4'].errors" class="invalid-feedback">
+                <div *ngIf="this.employeesurveyForm.controls['question4'].errors['required']">Field is required</div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="question5">5.What do you think about the cab facility in our company? </label>
+                    <div>
+                    <input id="excellent" type="radio" value="excellent" name="question5" formControlName="question5">
+                    <label for="excellent">Excellent</label>
+                    </div>
+                    <div>
+                    <input id="verygood" type="radio" value="verygood" name="question5" formControlName="question5">
+                    <label for="verygood">VeryGood</label>
+                    </div>
+                    <div>       
+                    <input id="good" type="radio" value="good" name="question5" formControlName="question5">
+                    <label for="good">Good</label>
+                    </div>
+                    <div>
+                    <input id="average" type="radio" value="average" name="question5" formControlName="question5">
+                    <label for="average">Average</label>
+                    </div>
+                    </div>
+                    <div *ngIf="submitted && this.employeesurveyForm.controls['question5'].errors" class="invalid-feedback">
+                    <div *ngIf="this.employeesurveyForm.controls['question5'].errors['required']">Field is required</div>
+                    </div>
+            <br>
+            <div class="form-group">
+                <button  class="btn btn-primary" type="submit">Submit</button>
+            </div>
+            <br>
+
+         </form>
+    </div>
+    <div class="col-3"></div>
+</div>

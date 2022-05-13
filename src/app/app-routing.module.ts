@@ -11,6 +11,7 @@ const routes: Routes = [
   {path:'',component:AdminloginComponent},
   {path:'employeelogin',component:EmployeeloginComponent},
   {path:'organization',component:OrganizationComponent},
+  //{path:'employeelogin',component:EmploginComponent},
   {path:'empportal',component:EmployeeportalComponent}
 ];
 

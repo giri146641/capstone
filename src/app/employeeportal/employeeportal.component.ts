@@ -17,43 +17,41 @@ export class EmployeeportalComponent implements OnInit {
   userId:number | undefined;
   questions: any = [
     {
-      questions: [{ question_value: 'What do you think about our company culture?', questionId: 1 }], answers: [{ answerId: 1, answer: 'Average', is_selected: true },
+      questions: [{ question_value: 'What do you think about our company culture?', questionId: 1 ,questionsType:'radio'}], answers: [{ answerId: 1, answer: 'Average', is_selected: true },
       { answerId: 2, answer: 'Good', is_selected: false },
       { answerId: 3, answer: 'VeryGood', is_selected: false },
       { answerId: 4, answer: 'Excellent', is_selected: false }]
     },
 
     {
-      questions: [{ question_value: 'What do you think about payroll?', questionId: 2 }], answers: [{ answerId: 5, answer: 'Average', is_selected: true },
+      questions: [{ question_value: 'What do you think about payroll?', questionId: 2,questionsType:'checkbox' }], answers: [{ answerId: 5, answer: 'Average', is_selected: true },
       { answerId: 6, answer: 'Good', is_selected: false },
       { answerId: 7, answer: 'VeryGood', is_selected: false },
       { answerId: 8, answer: 'Excellent', is_selected: false }]
     },
 
     {
-      questions: [{ question_value: 'What do you think about our company benfites regarding insurance?', questionId: 9 }], answers: [{ answerId: 1, answer: 'Average', is_selected: true },
+      questions: [{ question_value: 'What do you think about our company benfites regarding insurance?', questionId: 9,questionsType:'text' }], answers: [{ answerId: 1, answer: 'Average', is_selected: true },
       { answerId: 10, answer: 'Good', is_selected: false },
       { answerId: 11, answer: 'VeryGood', is_selected: false },
       { answerId: 12, answer: 'Excellent', is_selected: false }]
     },
 
     {
-      questions: [{ question_value: 'What do you think about our company infrastructure?', questionId: 4 }], answers: [{ answerId: 13, answer: 'Average', is_selected: true },
+      questions: [{ question_value: 'What do you think about our company infrastructure?', questionId: 4 ,questionsType:'dropdownlist'}], answers: [{ answerId: 13, answer: 'Average', is_selected: true },
       { answerId: 14, answer: 'Good', is_selected: false },
       { answerId: 15, answer: 'VeryGood', is_selected: false },
       { answerId: 16, answer: 'Excellent', is_selected: false }]
     },
 
     {
-      questions: [{ question_value: 'What do you think about the cab facility in our company?', questionId: 5 }], answers: [{ answerId: 17, answer: 'Average', is_selected: true },
+      questions: [{ question_value: 'What do you think about the cab facility in our company?', questionId: 5,questionsType:'text' }], answers: [{ answerId: 17, answer: 'Average', is_selected: true },
       { answerId: 18, answer: 'Good', is_selected: false },
       { answerId: 19, answer: 'VeryGood', is_selected: false },
       { answerId: 20, answer: 'Excellent', is_selected: false }]
     },
   ];
   loading: boolean = true;
-
-
 
   constructor(fb: FormBuilder,
     private response: EmployeeresponsesService,
@@ -99,6 +97,7 @@ export class EmployeeportalComponent implements OnInit {
     
     let user = new EmployeeResponse();
     user.userId=this.employeeData.userId;
+    console.log(this.employeeData[0].userId);
     this.questions.forEach((question: { questions: { question_value: any; questionId: any; }[]; answers: { is_selected: any; answer: any; answerId: any }[]; }) => {
       //console.log(question.questions);
       question.questions.forEach((quest: { question_value: any; questionId: any; }) => {
