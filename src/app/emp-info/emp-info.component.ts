@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Employee } from '../model/employee';
 import { EmployeeService } from '../service/employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-emp-info',
@@ -8,12 +9,13 @@ import { EmployeeService } from '../service/employee.service';
   styleUrls: ['./emp-info.component.css']
 })
 export class EmpInfoComponent implements OnInit {
+  [x: string]: any;
 
   empList : Employee[] = [];
 
   empStatus: string='';
 
-  constructor(private empService: EmployeeService) { 
+  constructor(private empService: EmployeeService,private route :Router) { 
     this.empList = []
     this.addEmployee();
   }
@@ -51,6 +53,9 @@ export class EmpInfoComponent implements OnInit {
     },_err=>{
       console.log("error while fetching data.")
     });
+  }
+  viewResponse(){
+    this.route.navigateByUrl('/ViewResponse');
   }
 
 }

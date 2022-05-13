@@ -9,12 +9,18 @@ import { EmpInfoComponent } from './emp-info/emp-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { SurveySummaryComponent } from './survey-summary/survey-summary.component';
+import { ViewResponseComponent } from './view-response/view-response.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     EmpInfoComponent,
+    AdminDashboardComponent,
+    SurveySummaryComponent,
+    ViewResponseComponent,
   ],
   imports: [
     BrowserModule,

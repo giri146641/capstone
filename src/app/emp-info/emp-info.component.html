@@ -10,7 +10,6 @@
       <thead class="table table-bordered table-dark">
         <tr>
           <th scope="col">User Name</th>
-          <th scope="col">Password</th>
           <th scope="col">Organization Name</th>
           <th scope="col">Email</th>
           <th scope="col">Gender</th>
@@ -26,7 +25,6 @@
       <tbody>
         <tr *ngFor="let emp of empList">
           <td>{{ emp.username }}</td>
-          <td>{{ emp.password }}</td>
           <td>{{ emp.orgname }}</td>
           <td>{{ emp.email }}</td>
           <td>{{ emp.gender }}</td>
@@ -46,7 +44,7 @@
             </div>
           </td>
           <td>
-            <a href="" button type="button" class="btn btn-primary">View Response</a>
+            <a href="" button type="button" class="btn btn-primary"  (click)="viewResponse()">View Response</a>
           </td>
         </tr>         
       </tbody>
