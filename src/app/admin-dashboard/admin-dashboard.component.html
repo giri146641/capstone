@@ -1,7 +1,15 @@
-<h1>Admin Dashboard</h1>
+<!-- <h1>Admin Dashboard</h1>
 
-<ul>
-    <li> <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" (click)="SurveySummary()">Survey Summary</button></li>
-    <li> <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" (click)="OrgInfo()">Organisation Details</button></li>
-    <li> <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" (click)="EmpInfo()">Employee details</button></li>
-</ul>
+
+    
+     <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" (click)="OrgInfo()">Organisation Details</button>
+     <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" (click)="OrgInfo()">Logout</button> -->
+<div class="container">
+    <aside>
+       <app-sidebar></app-sidebar>
+    </aside>
+   
+</div>
+<div class="Response-Summary">
+    <app-survey-summary></app-survey-summary>
+</div>

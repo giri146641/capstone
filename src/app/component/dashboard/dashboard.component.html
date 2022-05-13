@@ -1,174 +1,182 @@
-<div class="container-fluid">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Organization Info</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addOrganization">Add Organization</button>
+<div class="container">
+  <aside>
+     <app-sidebar></app-sidebar>
+  </aside>
+ 
+</div>
+<div class ="Organisations">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Organization Info</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addOrganization">Add Organization</button>
+          </div>
         </div>
+      </nav>
+  
+      <nav class="navbar">
+        <input class="form-control" type="text" name="name" [(ngModel)] = "name" (ngModelChange)="Search()"placeholder="enter name">
+      </nav>
+  
+  
+  
+      <table class="table table-bordered">
+        <thead class="table table-bordered table-dark">
+          <tr>
+            <th scope="col">Organization Name</th>
+            <th scope="col">Organization ID</th>
+            <th scope="col">Domain</th>
+            <th scope="col">City</th>
+            <th scope="col">Pincode</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let organization of orgList">
+            <td>{{ organization.name }}</td>
+            <td>{{ organization.id }}</td>
+            <td>{{ organization.domain }}</td>
+            <td>{{ organization.city }}</td>
+            <td>{{ organization.pincode }}</td>
+            <td>
+              <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editOrganization" (click)="editOrganization(organization)">Edit</button>
+              <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal" (click)="deleteOrganization(organization)">Delete</button>
+              <button type="button" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#UploadCsv">Upload CSV</button>
+              <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" (click)="EmpInfo()">EmpInfo</button>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+  
+  
+  <!-- Add Organization modal -->
+  <div class="modal fade" id="addOrganization" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add new Organization</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form [formGroup]="orgDetail">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Organization Name</label>
+                  <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Organization Id</label>
+                  <input type="number" formControlName="id" class="form-control" id="id">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Organization Domain</label>
+                    <input type="text" formControlName="domain" class="form-control" id="domain">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">City</label>
+                  <input type="text" formControlName="city" class="form-control" id="city">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Pincode</label>
+                  <input type="number" formControlName="pincode" class="form-control" id="pincode">
+                </div>
+                <div class="container">
+                  <div class="card">
+                    <div class="card-header">
+                      Upload csv for Employee Details
+                    </div>
+                    <div class="card-body">
+                      <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" />
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="addOrganization()">Add Organization</button>
+                  </div>
+              </form>
+        </div>
+  
       </div>
-    </nav>
-
-    <nav class="navbar">
-      <input class="form-control" type="text" name="name" [(ngModel)] = "name" (ngModelChange)="Search()"placeholder="enter name">
-    </nav>
-
-
-
-    <table class="table table-bordered">
-      <thead class="table table-bordered table-dark">
-        <tr>
-          <th scope="col">Organization Name</th>
-          <th scope="col">Organization ID</th>
-          <th scope="col">Domain</th>
-          <th scope="col">City</th>
-          <th scope="col">Pincode</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let organization of orgList">
-          <td>{{ organization.name }}</td>
-          <td>{{ organization.id }}</td>
-          <td>{{ organization.domain }}</td>
-          <td>{{ organization.city }}</td>
-          <td>{{ organization.pincode }}</td>
-          <td>
-            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editOrganization" (click)="editOrganization(organization)">Edit</button>
-            <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal" (click)="deleteOrganization(organization)">Delete</button>
-            <button type="button" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#UploadCsv">Upload CSV</button>
-            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" (click)="EmpInfo()">EmpInfo</button>
-          </td>
-        </tr>
-        
-      </tbody>
-    </table>
-
-
-<!-- Add Organization modal -->
-<div class="modal fade" id="addOrganization" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add new Organization</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        
+    </div>
+  </div>
+  
+  
+  <!--Edit Organization Modal -->
+  <div class="modal fade" id="editOrganization" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Organization</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+  
           <form [formGroup]="orgDetail">
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Organization Name</label>
-                <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Organization Name</label>
+              <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Organization Id</label>
+              <input type="number" formControlName="id" class="form-control" id="id">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Organization Domain</label>
+                <input type="text" formControlName="domain" class="form-control" id="domain">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">City</label>
+              <input type="text" formControlName="city" class="form-control" id="city">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Pincode</label>
+              <input type="number" formControlName="pincode" class="form-control" id="pincode">
+            </div>
+            <div class="modal-footer">
+              <div>
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-success" (click)="updateOrganization()" data-bs-dismiss="modal">Update</button>
+              </div> 
               </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Organization Id</label>
-                <input type="number" formControlName="id" class="form-control" id="id">
-              </div>
-              <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Organization Domain</label>
-                  <input type="text" formControlName="domain" class="form-control" id="domain">
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">City</label>
-                <input type="text" formControlName="city" class="form-control" id="city">
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Pincode</label>
-                <input type="number" formControlName="pincode" class="form-control" id="pincode">
-              </div>
-              <div class="container">
-                <div class="card">
-                  <div class="card-header">
-                    Upload csv for Employee Details
-                  </div>
-                  <div class="card-body">
-                    <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" />
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" (click)="addOrganization()">Add Organization</button>
-                </div>
-            </form>
+          </form>          
+        </div>        
       </div>
-
     </div>
   </div>
-</div>
-
-
-<!--Edit Organization Modal -->
-<div class="modal fade" id="editOrganization" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <!--Upload CSV Modal -->
+  <div class="modal fade" id="UploadCsv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Organization</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
-        <form [formGroup]="orgDetail">
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Organization Name</label>
-            <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Organization Id</label>
-            <input type="number" formControlName="id" class="form-control" id="id">
-          </div>
-          <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Organization Domain</label>
-              <input type="text" formControlName="domain" class="form-control" id="domain">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">City</label>
-            <input type="text" formControlName="city" class="form-control" id="city">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Pincode</label>
-            <input type="number" formControlName="pincode" class="form-control" id="pincode">
-          </div>
-          <div class="modal-footer">
-            <div>
-              <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-outline-success" (click)="updateOrganization()" data-bs-dismiss="modal">Update</button>
-            </div> 
+        <div class="container">
+          <div class="card">
+            <div class="card-header">
+              Upload csv for Employee Details
             </div>
-        </form>          
-      </div>        
-    </div>
-  </div>
-</div>
-
-<!--Upload CSV Modal -->
-<div class="modal fade" id="UploadCsv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      <div class="container">
-        <div class="card">
-          <div class="card-header">
-            Upload csv for Employee Details
-          </div>
-          <div class="card-body">
-            <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" />
+            <div class="card-body">
+              <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" />
+            </div>
           </div>
         </div>
+        
       </div>
-      
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary">Upload</button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Upload</button>
+      </div>
     </div>
   </div>
-</div>
-</div>
+  </div>
+  </div>
 </div>

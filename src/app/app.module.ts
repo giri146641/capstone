@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { SurveySummaryComponent } from './survey-summary/survey-summary.component';
 import { ViewResponseComponent } from './view-response/view-response.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ViewResponseComponent } from './view-response/view-response.component';
     AdminDashboardComponent,
     SurveySummaryComponent,
     ViewResponseComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

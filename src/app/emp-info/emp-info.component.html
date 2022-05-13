@@ -1,11 +1,18 @@
-<div class="container-fluid">
+<div class="container">
+  <aside>
+     <app-sidebar></app-sidebar>
+  </aside>
+ 
+</div>
+<div class="EmpInfo">
+  <div class="container-fluid">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Employee Details</a>
       </div>
   </nav>
 
-    
+   
     <table class="table table-bordered">
       <thead class="table table-bordered table-dark">
         <tr>
@@ -36,18 +43,21 @@
           <td>
             <div class="btn-group" (click)="onButtonGroupClick($event)">
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <p>
-                  <input type="radio" value="active" name="statusActive"> Active
-                  <input type="radio" value="inactive" name="statusInactive"> Inactive
-               </p>
+                
+                
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+                </label>
               </div>
             </div>
           </td>
           <td>
-            <a href="" button type="button" class="btn btn-primary"  (click)="viewResponse()">View Response</a>
+             <button  class="btn btn-primary"  (click)="viewResponse()">View Response</button>
           </td>
         </tr>         
       </tbody>
     </table>
 
+</div>
 </div>
