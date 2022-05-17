@@ -13,6 +13,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { SurveySummaryComponent } from './survey-summary/survey-summary.component';
 import { ViewResponseComponent } from './view-response/view-response.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { EmployeeloginComponent } from './employeelogin/employeelogin.component';
+import { EmployeeportalComponent } from './employeeportal/employeeportal.component';
+import { EmployeesurveyComponent } from './employeesurvey/employeesurvey.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     SurveySummaryComponent,
     ViewResponseComponent,
     SidebarComponent,
+    AdminloginComponent,
+    EmployeeloginComponent,
+    EmployeeportalComponent,
+    EmployeesurveyComponent,
   ],
   imports: [
     BrowserModule,

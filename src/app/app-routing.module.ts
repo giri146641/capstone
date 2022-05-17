@@ -6,6 +6,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { SurveySummaryComponent } from './survey-summary/survey-summary.component';
 import { ViewResponseComponent } from './view-response/view-response.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { EmployeeloginComponent } from './employeelogin/employeelogin.component';
+import { EmployeeportalComponent } from './employeeportal/employeeportal.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { EmployeesurveyComponent } from './employeesurvey/employeesurvey.component';
 
 const routes: Routes = [
     {path:'dashboard',component:DashboardComponent},
@@ -13,7 +17,11 @@ const routes: Routes = [
     {path:'',component:AdminDashboardComponent},
     {path:'SurveySummary',component:SurveySummaryComponent},
     {path:'ViewResponse', component:ViewResponseComponent},
-    {path:'sidebar', component:SidebarComponent}
+    {path:'sidebar', component:SidebarComponent},
+    {path:'emplogin', component:EmployeeloginComponent},
+    {path:'survey', component:EmployeesurveyComponent},
+    {path:'AdminLogin',component:AdminloginComponent},
+    {path:'emp-portal',component:EmployeeportalComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,38 @@
+/* .whole{
+    height: 100% ;
+    width: 100%;
+    background-position:center ;
+    background-size: cover;
+    position:absolute;
+    background-color: rgb(236, 172, 168);
+
+
+} */
+.form{
+    
+    width:380px;
+    height:150px;
+    position:relative;
+    margin: 15% auto;
+    border: 3px solid black;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.formText{
+    display: relative;
+    margin-left: 40%;
+    
+
+}
+#btn{
+    width:75%;
+    padding: 20px 30px ;
+    cursor: pointer;
+    display: block;
+    margin:55px auto;
+    box-shadow: 4px 3px 8px rgb(153, 151, 151);
+    
+} 
