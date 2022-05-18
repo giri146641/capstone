@@ -11,7 +11,7 @@ export class EmployeedetailsService {
   getEmployeeData(){
     return this.http.get("https://localhost:7183/api/EmployeeDetails");
   }
-  checkCredientials(){
-    return this.http.get("https://localhost:7183/api/EmployeeDetails/GetEmployee/{Username}/{password}");
-  }
+ getQuestions(){
+   return this.http.get("https://localhost:7183/api/Question");
+ }
 }

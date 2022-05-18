@@ -7,7 +7,6 @@ import { EmployeeportalComponent } from './employeeportal/employeeportal.compone
 import { OrganizationComponent } from './organization/organization.component';
 
 const routes: Routes = [
-  //{path:'',component:AppComponent,pathMatch:'full'},
   {path:'',component:AdminloginComponent},
   {path:'employeelogin',component:EmployeeloginComponent},
   {path:'organization',component:OrganizationComponent},

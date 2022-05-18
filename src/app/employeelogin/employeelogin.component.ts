@@ -49,6 +49,7 @@ export class EmployeeloginComponent implements OnInit {
         this.router.navigate([this.returnUrl]);
       }else{
         alert("Inavid Credientials");
+        this.loginForm.reset();
       }
     });
     

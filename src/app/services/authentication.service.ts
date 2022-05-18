@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
 import { EmployeeDetail } from '../models/EmployeeDetails';
 
 @Injectable({ providedIn: 'root' })
@@ -28,7 +27,6 @@ export class AuthenticationService {
           "password": password
         })
             .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
                 let us=new EmployeeDetail();
                 us.userId=user.userId;
                 us.username=user.username;

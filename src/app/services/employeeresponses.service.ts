@@ -29,7 +29,6 @@ public get currentUserValue(): EmployeeResponse {
       user.responseId=userData.responseId;
       user.userId=userData.userId;
       user.questionId=userData.questionId;
-      user.answerId=userData.answerId;
       user.answer=userData.answer;
       return user;
   }));
