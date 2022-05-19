@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeedetailsService } from '../services/employeedetails.service';
+
 import {Router} from '@angular/router';
 
 @Component({
@@ -8,30 +8,25 @@ import {Router} from '@angular/router';
   styleUrls: ['./Adminlogin.component.css']
 })
 export class AdminloginComponent implements OnInit {
-credintials:any="";
-  constructor(private router: Router,
-    private details:EmployeedetailsService) { }
+
+  constructor(private router: Router) { }
 adminId:string | undefined;
 username: string | undefined;
 password: string | undefined;
 
 
   ngOnInit() {
-//this.details.getAdminCredientials().subscribe(data=>{
-//this.credintials=data;
-//console.log(this.credintials);
-//})
   }
 
   login() : void {
+    console.log(this.username);
     if(this.username == 'admin' && this.password == 'admin'){
-     this.router.navigate(["organization"]);
+     this.router.navigate(["adminDashboard"]);
     }
     else {
       alert("Invalid credentials");
     }
   }
-
   emplogin(){
     this.router.navigateByUrl('/employeelogin');
   }

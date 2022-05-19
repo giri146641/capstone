@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import { EmployeedetailsService } from '../services/employeedetails.service';
 
 @Component({
   selector: 'app-employeelogin',
@@ -11,8 +12,8 @@ import { AuthenticationService } from '../services/authentication.service';
 export class EmployeeloginComponent implements OnInit {
   empdetails: any;
   employeeData: any[] = [];
-  Credintials:any;
   loginForm: FormGroup;
+  user:any;
   returnUrl: string="";
   submitted=false;
   loading=false;
@@ -21,7 +22,8 @@ export class EmployeeloginComponent implements OnInit {
   constructor(private router: Router,
     private route:ActivatedRoute,
     private formBuilder: FormBuilder,
-    private authentication:AuthenticationService) {
+    private authentication:AuthenticationService,
+    private service:EmployeedetailsService) {
       this.loginForm = this.formBuilder.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
@@ -35,6 +37,10 @@ export class EmployeeloginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
   });
+  this.service.checkEmployeeReponses().subscribe(data=>{
+  this.user=data;
+  console.log(this.user);
+  })
  
   this.returnUrl=this.route.snapshot.queryParams['returnUrl'] || '/empportal';;
   }
@@ -48,8 +54,14 @@ export class EmployeeloginComponent implements OnInit {
       console.log(data.userId);
       if(data.userId!==0){
         sessionStorage.setItem('key', String(data.userId));
-        
-        this.router.navigate([this.returnUrl]);
+        for(let i=0;i<10;i++){
+          if(data.userId==this.user[i].userId){
+          console.log("already submiited");
+          this.loginForm.reset();
+          }else{
+            this.router.navigate([this.returnUrl]);
+          }
+        }
       }else{
         alert("Inavid Credientials");
         this.loginForm.reset();

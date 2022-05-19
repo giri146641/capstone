@@ -13,7 +13,8 @@ import { Router } from '@angular/router';
 export class EmployeeportalComponent implements OnInit {
   form: FormGroup;
   employeeResponse: any;
-   questionData:any;
+  questionData:any;
+  questionList:any;
 
   userId: number | undefined;
   selectedValue:any="";
@@ -54,12 +55,17 @@ export class EmployeeportalComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+
     this.empdetails.getQuestions().subscribe(que=>{
       this.questionData=que;
       console.log(this.questionData);
     })
-    
-   this.empdetails.getEmployeeReponses().subscribe(response=>{
+
+
+
+
+
+   this.empdetails.checkEmployeeReponses().subscribe(response=>{
   this.employeeResponse=response;
   console.log(this.employeeResponse);
 })

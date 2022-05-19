@@ -14,10 +14,10 @@ export class EmployeedetailsService {
  getQuestions(){
    return this.http.get("https://localhost:7183/api/Question");
  }
- getEmployeeReponses(){
+ checkEmployeeReponses(){
   return this.http.get("https://localhost:7183/api/EmployeeResponses");
  }
- checkEmployeeResponse(){
+ checkEmployeeResponseById(){
   return this.http.get("https://localhost:7183/api/EmployeeResponses/{id}");
  }
 }
