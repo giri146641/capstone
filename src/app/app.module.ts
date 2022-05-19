@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import {HttpClientModule} from '@angular/common/http';
 import { EmpInfoComponent } from './emp-info/emp-info.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -37,7 +36,6 @@ import { EmployeesurveyComponent } from './employeesurvey/employeesurvey.compone
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     Ng2SearchPipeModule,
     FormsModule
   ],

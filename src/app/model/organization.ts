@@ -1,8 +1,7 @@
 export class Organization {
-    // [x: string]: any;
-    id : number=0;
-    name : string='';
-    domain : string='';
+    organizationNumber : number=0;
+    organizationName : string='';
+    organizationDomain : string='';
     city : string='';
     pincode : number=0;
 }

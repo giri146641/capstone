@@ -16,30 +16,37 @@
     <table class="table table-bordered">
       <thead class="table table-bordered table-dark">
         <tr>
-          <th scope="col">User Name</th>
-          <th scope="col">Organization Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Gender</th>
-          <th scope="col">Date of Birth</th>
-          <th scope="col">Contact Number</th>
-          <th scope="col">City</th>
-          <th scope="col">Designation</th>
-          <th scope="col">Pan Number</th>
-          <th scope="col">Status</th>
-          <th scope="col">Response</th>
+          <th scope="col">User Id</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Password</th>
+            <!-- <th scope="col">Organization Name</th> -->
+            <th scope="col">Organization Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Contact Number</th>
+            <th scope="col">City</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Pan Number</th>
+            <th scope="col">Status</th>
+            <th scope="col">Response</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let emp of empList">
-          <td>{{ emp.username }}</td>
-          <td>{{ emp.orgname }}</td>
-          <td>{{ emp.email }}</td>
-          <td>{{ emp.gender }}</td>
-          <td>{{ emp.dob }}</td>
-          <td>{{ emp.contactno }}</td>
-          <td>{{ emp.city }}</td>
-          <td>{{ emp.designation }}</td>
-          <td>{{ emp.pan }}</td>
+          <td>{{ emp.userId }}</td>
+            <td>{{ emp.username }}</td>
+            <td>{{ emp.password }}</td>
+            <!-- <td>{{ emp.orgname }}</td> -->
+            <td>{{ emp.organizationNumber }}</td>
+            <td>{{ emp.employeeEmail }}</td>
+            <td>{{ emp.gender }}</td>
+            <td>{{ emp.dateOfBirth }}</td>
+            <td>{{ emp.contactNumber }}</td>
+            <td>{{ emp.city }}</td>
+            <td>{{ emp.designation }}</td>
+            <td>{{ emp.panNumber }}</td>
+            <!-- <td>{{ emp.status }}</td> -->
           <td>
             <div class="btn-group" (click)="onButtonGroupClick($event)">
               <div class="btn-group btn-group-toggle" data-toggle="buttons">

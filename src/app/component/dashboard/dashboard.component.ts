@@ -1,15 +1,13 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
-import {FormGroup, FormBuilder, FormControl} from '@angular/forms'
+import {FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms'
 import { Organization } from 'src/app/model/organization';
 import { OrganizationService } from 'src/app/service/organization.service';
 import { Router } from '@angular/router';
-
-export class CsvData {
-  public empid: any;
-  public empname: any;
-  public companyName: any;
-  public address: any;
-}
+import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
+import { EmployeeService } from 'src/app/service/employee.service';
+import { EmpUploadService } from 'src/app/service/emp-upload.service';
+import { EmployeeDetails } from 'src/app/model/EmployeeDetails';
+import { Employee } from 'src/app/model/employee';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,14 +16,17 @@ export class CsvData {
 })
 export class DashboardComponent implements OnInit {
 
-  orgDetail !: FormGroup;
+  orgDetail!: FormGroup;
   orgObj : Organization = new Organization();
   orgList : Organization[] = []; 
   public records: any[] = [];
   @ViewChild('csvReader') csvReader: any;
   name : any;
+  csvRecords: any=[];
+  header: boolean = true;
+  empList: Employee[]=[];
   
-  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService ,private route: Router) { 
+  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService ,private route: Router,private ngxCsvParser: NgxCsvParser,private empService : EmployeeService,private empUpload : EmpUploadService) { 
     this.orgList = [],
     this.getAllOrganization()
   }
@@ -34,7 +35,7 @@ export class DashboardComponent implements OnInit {
 
     this.getAllOrganization()
     this.orgDetail = this.formBuilder.group({
-      name : [''],
+      name : ['',[Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]],
       id : [''],
       domain : [''],
       city : [''],
@@ -44,20 +45,12 @@ export class DashboardComponent implements OnInit {
     
   }
 
-  // addDemoOrganization(){
-  //   this.orgList=[
-  //     {id:108,name:"Mercer",domain:"Insurance",city:"Pune",pincode:491001},
-  //     {id:121,name:"HDFC Bank",domain:"Banking",city:"Mumbai",pincode:43210},
-  //     {id:199,name:"Infosys",domain:"Tech",city:"Banglore",pincode:472261},
-  //   ]
-  // }
-
   addOrganization(){
 
     console.log(this.orgDetail);
-    this.orgObj.id = this.orgDetail.value.id;
-    this.orgObj.name = this.orgDetail.value.name;
-    this.orgObj.domain = this.orgDetail.value.domain;
+    this.orgObj.organizationNumber = this.orgDetail.value.id;
+    this.orgObj.organizationName = this.orgDetail.value.name;
+    this.orgObj.organizationDomain = this.orgDetail.value.domain;
     this.orgObj.city = this.orgDetail.value.city;
     this.orgObj.pincode = this.orgDetail.value.pincode; 
 
@@ -80,18 +73,18 @@ export class DashboardComponent implements OnInit {
   }
 
   editOrganization(org : Organization){
-    this.orgDetail.controls['id'].setValue(org.id);
-    this.orgDetail.controls['name'].setValue(org.name);
-    this.orgDetail.controls['domain'].setValue(org.domain);
+    this.orgDetail.controls['id'].setValue(org.organizationNumber);
+    this.orgDetail.controls['name'].setValue(org.organizationName);
+    this.orgDetail.controls['domain'].setValue(org.organizationDomain);
     this.orgDetail.controls['city'].setValue(org.city);
     this.orgDetail.controls['pincode'].setValue(org.pincode);
   }
 
   updateOrganization() {
 
-    this.orgObj.id = this.orgDetail.value.id;
-    this.orgObj.name = this.orgDetail.value.name;
-    this.orgObj.domain = this.orgDetail.value.domain;
+    this.orgObj.organizationNumber = this.orgDetail.value.id;
+    this.orgObj.organizationName = this.orgDetail.value.name;
+    this.orgObj.organizationDomain = this.orgDetail.value.domain;
     this.orgObj.city = this.orgDetail.value.city;
     this.orgObj.pincode = this.orgDetail.value.pincode;
 
@@ -100,7 +93,7 @@ export class DashboardComponent implements OnInit {
       this.getAllOrganization();
     },err=>{
       console.log(err);
-    })
+    });
 
   }
 
@@ -116,64 +109,7 @@ export class DashboardComponent implements OnInit {
 
     }
 
-    uploadListener($event: any): void {
-
-      let text = [];
-      let files = $event.srcElement.files;
-  
-      if (this.isValidCSVFile(files[0])) {
-  
-        let input = $event.target;
-        let reader = new FileReader();
-        reader.readAsText(input.files[0]);
-  
-        reader.onload = () => {
-          let csvData = reader.result;
-          let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
-  
-          let headersRow = this.getHeaderArray(csvRecordsArray);
-  
-          this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-        };
-  
-        reader.onerror = function () {
-          console.log('error is occured while reading file!');
-        };
-  
-      }
-    }
-
-    getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
-      let csvArr = [];
-  
-      for (let i = 1; i < csvRecordsArray.length; i++) {
-        let curruntRecord = (<string>csvRecordsArray[i]).split(',');
-        if (curruntRecord.length == headerLength) {
-          let csvRecord: CsvData = new CsvData();
-          csvRecord.empid = curruntRecord[0].trim();
-          csvRecord.empname = curruntRecord[1].trim();
-          csvRecord.companyName = curruntRecord[2].trim();
-          csvRecord.address = curruntRecord[3].trim();
-          csvArr.push(csvRecord);
-        }
-      }
-      return csvArr;
-    }
-
-  //check etension
-  isValidCSVFile(file: any) {
-    return file.name.endsWith(".csv");
-  }
-
-  getHeaderArray(csvRecordsArr: any) {
-    let headers = (<string>csvRecordsArr[0]).split(',');
-    let headerArray = [];
-    for (let j = 0; j < headers.length; j++) {
-      headerArray.push(headers[j]);
-    }
-    return headerArray;
-  }
-
+    
   EmpInfo(){
     this.route.navigateByUrl('empInfo');
   }
@@ -183,17 +119,52 @@ export class DashboardComponent implements OnInit {
       this.ngOnInit()
     } else {
       this.orgList = this.orgList.filter(res =>{
-        return res.name.toLowerCase().match(this.name.toLocaleLowerCase());
+        return res.organizationName.toLowerCase().match(this.name.toLocaleLowerCase());
       } ) 
     }
   }
 
+  @ViewChild('fileImportInput') fileImportInput: any;
 
+  fileChangeListener($event: any): void {
 
-  
+    const files = $event.srcElement.files;
+    this.header = (this.header as unknown as string) === 'true' || this.header === true;
+
+    this.ngxCsvParser.parse(files[0], { header: this.header, delimiter: ',' })
+      .subscribe({
+        next: (result): void => {
+          console.log('Result', result);
+          this.csvRecords = result;
+        },
+        error: (error: NgxCSVParserError): void => {
+          console.log('Error', error);
+        }
+      });
   }
 
-
-
-
-
+  uploadEmployee() {
+    let user = new EmployeeDetails(); 
+    console.log('n=',this.csvRecords.length);
+    for (let i = 0; i < this.csvRecords.length; i++){
+    user.city = this.csvRecords[i].City;
+    user.username = this.csvRecords[i].Username;
+    user.contactNumber = this.csvRecords[i].ContactNumber;
+    user.dateOfBirth = this.csvRecords[i].DateOfBirth;
+    user.designation = this.csvRecords[i].Degisnation;
+    user.employeeEmail = this.csvRecords[i].EmployeeEmail;
+    user.gender = this.csvRecords[i].Gender;
+    user.organizationName = this.csvRecords[i].OrganizationName;
+    user.organizationNumber = this.csvRecords[i].OrganizationNumber;
+    user.panNumber = this.csvRecords[i].PanNumber;
+    user.password = this.csvRecords[i].Password;
+    user.userId = this.csvRecords[i].UserID;
+    user.status = this.csvRecords[i].Status;
+    this.empUpload.EmployeeDetails(user).subscribe((res: any)=>{
+      console.log(res);
+    },(err: any)=>{
+      console.log(err);
+    });
+  }
+ }
+}

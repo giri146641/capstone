@@ -2,10 +2,9 @@
   <aside>
      <app-sidebar></app-sidebar>
   </aside>
- 
 </div>
 <div class ="Organisations">
-  <div class="container-fluid">
+<div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Organization Info</a>
@@ -17,18 +16,18 @@
           </div>
         </div>
       </nav>
-  
+
       <nav class="navbar">
         <input class="form-control" type="text" name="name" [(ngModel)] = "name" (ngModelChange)="Search()"placeholder="enter name">
       </nav>
-  
-  
-  
+
+
+
       <table class="table table-bordered">
         <thead class="table table-bordered table-dark">
           <tr>
             <th scope="col">Organization Name</th>
-            <th scope="col">Organization ID</th>
+            <th scope="col">Organization Number</th>
             <th scope="col">Domain</th>
             <th scope="col">City</th>
             <th scope="col">Pincode</th>
@@ -37,22 +36,23 @@
         </thead>
         <tbody>
           <tr *ngFor="let organization of orgList">
-            <td>{{ organization.name }}</td>
-            <td>{{ organization.id }}</td>
-            <td>{{ organization.domain }}</td>
+            <td>{{ organization.organizationName }}</td>
+            <td>{{ organization.organizationNumber }}</td>
+            <td>{{ organization.organizationDomain }}</td>
             <td>{{ organization.city }}</td>
             <td>{{ organization.pincode }}</td>
             <td>
               <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editOrganization" (click)="editOrganization(organization)">Edit</button>
               <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal" (click)="deleteOrganization(organization)">Delete</button>
               <button type="button" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#UploadCsv">Upload CSV</button>
-              <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" (click)="EmpInfo()">EmpInfo</button>
+              <!-- <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" (click)="EmpInfo()">EmpInfo</button> -->
+              <a class="btn btn-outline-info me-2" [routerLink]="['/empInfo/'+organization.organizationNumber]">Employee Info</a>
             </td>
           </tr>
           
         </tbody>
       </table>
-  
+
   
   <!-- Add Organization modal -->
   <div class="modal fade" id="addOrganization" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -67,7 +67,7 @@
             <form [formGroup]="orgDetail">
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Organization Name</label>
-                  <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+                  <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp" required>
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">Organization Id</label>
@@ -91,22 +91,23 @@
                       Upload csv for Employee Details
                     </div>
                     <div class="card-body">
-                      <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" />
+                      <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="fileChangeListener($event)" accept=".csv" />
+                      <button type="submit" class="btn btn-outline-success" (click)="uploadEmployee()">Upload</button>
                     </div>
                   </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" (click)="addOrganization()">Add Organization</button>
+                    <button type="button" class="btn btn-primary" (click)="addOrganization()" data-bs-dismiss="modal">Add Organization</button>
                   </div>
               </form>
         </div>
-  
+
       </div>
     </div>
   </div>
-  
-  
+
+
   <!--Edit Organization Modal -->
   <div class="modal fade" id="editOrganization" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -116,7 +117,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-  
+
           <form [formGroup]="orgDetail">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Organization Name</label>
@@ -149,9 +150,9 @@
       </div>
     </div>
   </div>
-  
+
   <!--Upload CSV Modal -->
-  <div class="modal fade" id="UploadCsv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="UploadCsv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -165,7 +166,7 @@
               Upload csv for Employee Details
             </div>
             <div class="card-body">
-              <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" />
+              <input type="file" #csvReader name="Upload CSV" (change)="fileChangeListener($event)" id="txtFileUpload" accept=".csv" />
             </div>
           </div>
         </div>
@@ -173,10 +174,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Upload</button>
+        <button type="submit" class="btn btn-primary" (click)="uploadEmployee()" data-bs-dismiss="modal">Upload</button>
       </div>
     </div>
   </div>
-  </div>
-  </div>
+</div>
 </div>

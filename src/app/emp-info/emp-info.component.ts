@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../model/employee';
+import { Organization } from '../model/organization';
 import { EmployeeService } from '../service/employee.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-emp-info',
@@ -9,26 +10,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./emp-info.component.css']
 })
 export class EmpInfoComponent implements OnInit {
-  [x: string]: any;
 
   empList : Employee[] = [];
-
+  empObj : Employee = new Employee();
   empStatus: string='';
+  id: any;
 
-  constructor(private empService: EmployeeService,private route :Router) { 
+  constructor(private empService: EmployeeService, private Inroute:ActivatedRoute,private route :Router) { 
     this.empList = []
-    this.addEmployee();
-  }
-
-  addEmployee(){
-    this.empList = [
-      {username:"Ankit@04",password:"Mercer@123",email:"ankit@gmail.com",gender:"male",dob:"23/10/1999",contactno:9131172312,city:"Durg",designation:"Software Enginner",pan:"FUA12345678",status:"Active",orgname:"Mercer"},
-      {username:"Om@1999",password:"Mercer@123",email:"om@gmail.com",gender:"Female",dob:"2/7/1999",contactno:9131172222,city:"Durg",designation:"Software Enginner",pan:"FUA12345678",status:"Active",orgname:"Mercer"},
-      {username:"Akhil@21",password:"Mercer@123",email:"akhil@gmail.com",gender:"male",dob:"23/10/1999",contactno:7131172312,city:"Durg",designation:"HR",pan:"FUA12345678",status:"Active",orgname:"Mercer"}
-    ]
   }
 
   ngOnInit(): void {
+
+    this.id=this.Inroute.snapshot.params['id'];
+    let emp = new Employee; 
+    this.empService.getAllEmployee(this.id).subscribe(res=>{
+      this.empList = res;
+      console.log(this.empList);
+    },_err=>{
+      console.log("error while fetching data.")
+    });
   }
 
   onButtonGroupClick($event: { target: any; srcElement: any; }){
@@ -47,13 +48,6 @@ export class EmpInfoComponent implements OnInit {
 
   }
 
-  getAllOrganization() {
-    this.empService.getAllEmployee().subscribe(res=>{
-      this.empList = res;
-    },_err=>{
-      console.log("error while fetching data.")
-    });
-  }
   viewResponse(){
     this.route.navigateByUrl('/ViewResponse');
   }

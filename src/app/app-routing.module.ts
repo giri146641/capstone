@@ -13,7 +13,7 @@ import { EmployeesurveyComponent } from './employeesurvey/employeesurvey.compone
 
 const routes: Routes = [
     {path:'dashboard',component:DashboardComponent},
-    {path:'empInfo',component:EmpInfoComponent},
+    {path:'empInfo/:id',component:EmpInfoComponent},
     {path:'',component:AdminDashboardComponent},
     {path:'SurveySummary',component:SurveySummaryComponent},
     {path:'ViewResponse', component:ViewResponseComponent},

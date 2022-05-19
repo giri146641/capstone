@@ -16,10 +16,10 @@ export class OrganizationService {
 
   constructor(private http: HttpClient) {
 
-    this.addOrgURL = 'http://localhost:3000/orgList'
-    this.getOrgURL = 'http://localhost:3000/orgList'
-    this.updateOrgUrl = 'http://localhost:3000/orgList'
-    this.deleteOrgUrl = 'http://localhost:3000/orgList'
+    this.addOrgURL = 'https://localhost:7183/api/OrganizationDetails'
+    this.getOrgURL = 'https://localhost:7183/api/OrganizationDetails'
+    this.updateOrgUrl = 'https://localhost:7183/api/OrganizationDetails'
+    this.deleteOrgUrl = 'https://localhost:7183/api/OrganizationDetails'
 
    }
 
@@ -32,10 +32,10 @@ export class OrganizationService {
    }
 
    updateOrganization(org : Organization): Observable<Organization>{
-     return this.http.put<Organization>(this.updateOrgUrl+'/'+org.id,org);
+     return this.http.put<Organization>(this.updateOrgUrl+'/'+org.organizationNumber,org);
    }
 
    deleteOrganization(org : Organization): Observable<Organization>{
-     return this.http.delete<Organization>(this.deleteOrgUrl+'/'+org.id);
+     return this.http.delete<Organization>(this.deleteOrgUrl+'/'+org.organizationNumber);
    }
 }

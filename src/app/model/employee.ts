@@ -1,17 +1,16 @@
 export class Employee {
     
-    // id : number=0;
-    orgname : string="";
+    userId : number=0;
+    organizationNumber : number=0;
     password : string="";
     username : string='';
-    email : string='';
+    employeeEmail : string='';
     gender : string='';
-    dob : string='';
-    contactno : number=0;
+    dateOfBirth : string='';
+    contactNumber : number=0;
     city : string='';
     designation : string='';
-    pan : string='';
+    panNumber : string='';
     status : string='';
-    // response : string='';
     
 }
