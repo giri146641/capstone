@@ -1,13 +1,7 @@
-h2{
-    color: red;
-    text-align: center;
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
 }
-input{
-    width: 20%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-  }
-  label{
-      color: black;
-  }
