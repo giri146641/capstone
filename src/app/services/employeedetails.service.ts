@@ -14,4 +14,10 @@ export class EmployeedetailsService {
  getQuestions(){
    return this.http.get("https://localhost:7183/api/Question");
  }
+ getEmployeeReponses(){
+  return this.http.get("https://localhost:7183/api/EmployeeResponses");
+ }
+ checkEmployeeResponse(){
+  return this.http.get("https://localhost:7183/api/EmployeeResponses/{id}");
+ }
 }

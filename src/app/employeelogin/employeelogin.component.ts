@@ -45,7 +45,10 @@ export class EmployeeloginComponent implements OnInit {
     this.authentication.login(this.loginForm.value.username, this.loginForm.value.password)
     .subscribe(data=>{
       console.log(data);
+      console.log(data.userId);
       if(data.userId!==0){
+        sessionStorage.setItem('key', String(data.userId));
+        
         this.router.navigate([this.returnUrl]);
       }else{
         alert("Inavid Credientials");

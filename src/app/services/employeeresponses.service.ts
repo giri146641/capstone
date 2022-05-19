@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { EmployeeResponse } from '../models/EmployeeResponse';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
@@ -23,14 +23,18 @@ public get currentUserValue(): EmployeeResponse {
 }
 
   EmployeeResponse(response: EmployeeResponse) {
-    return this.http.post<any>("https://localhost:7183/api/EmployeeResponses",response)
-    .pipe(map(userData => {
-      let user=new EmployeeResponse();
-      user.responseId=userData.responseId;
-      user.userId=userData.userId;
-      user.questionId=userData.questionId;
-      user.answer=userData.answer;
-      return user;
-  }));
+  
+    // let bar = JSON.stringify(response.answerId);
+    //  let body = new HttpParams();
+    //  body = body.set('vs', bar);
+    var url="https://localhost:7183/api/EmployeeResponses?QuestionId="+response.questionId+"&UserId="+response.userId;
+    return this.http.post<any>(url,response.answerId);
+  //   .pipe(map(userData => {
+  //     let user=new EmployeeResponse();
+  //     user.userId=userData.userId;
+  //     user.questionId=userData.questionId;
+  //     user.answerId=JSON.stringify(response.answerId);
+  //     return user;
+  // }));
   }
 }
