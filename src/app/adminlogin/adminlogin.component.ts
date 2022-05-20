@@ -20,8 +20,8 @@ password: string | undefined;
 
   login() : void {
     console.log(this.username);
-    if(this.username == 'admin' && this.password == 'admin'){
-     this.router.navigate(["adminDashboard"]);
+    if(this.username == 'admin' && this.password =='admin'){
+  this.router.navigateByUrl('/organization');
     }
     else {
       alert("Invalid credentials");

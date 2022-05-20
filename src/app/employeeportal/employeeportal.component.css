@@ -7,5 +7,10 @@
   .example-radio-button {
      margin: 5px;
    }
-  input{
+  h2{
+    text-align: center;
   }
+  .row{  
+    height: 650 px;  
+ background-size: cover;
+} 

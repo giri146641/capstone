@@ -16,3 +16,11 @@ export class QuestionList{
   "question_value":string="";
   "answers":any[]=[];
 }
+
+export class AnswersModel{
+  
+    "answerId": number=0;
+    "questionId": number=0;
+    "answer1": string="";
+  
+}

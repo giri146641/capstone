@@ -54,7 +54,7 @@ export class EmployeeloginComponent implements OnInit {
       console.log(data.userId);
       if(data.userId!==0){
         sessionStorage.setItem('key', String(data.userId));
-        for(let i=0;i<10;i++){
+        for(let i=0;i<100;i++){
           if(data.userId==this.user[i].userId){
           console.log("already submiited");
           this.loginForm.reset();
