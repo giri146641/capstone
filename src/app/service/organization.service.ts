@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Organization } from '../model/organization';
+import { CsvFile } from '../model/CsvFile';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class OrganizationService {
   getOrgURL : string;
   updateOrgUrl : string;
   deleteOrgUrl : string;
+  csvUploadUrl: string;
 
   constructor(private http: HttpClient) {
 
@@ -20,6 +22,7 @@ export class OrganizationService {
     this.getOrgURL = 'https://localhost:7183/api/OrganizationDetails'
     this.updateOrgUrl = 'https://localhost:7183/api/OrganizationDetails'
     this.deleteOrgUrl = 'https://localhost:7183/api/OrganizationDetails'
+    this.csvUploadUrl = 'https://localhost:7183/api/EmployeeCsv/upload'
 
    }
 

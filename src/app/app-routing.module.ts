@@ -9,7 +9,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { EmployeeloginComponent } from './employeelogin/employeelogin.component';
 import { EmployeeportalComponent } from './employeeportal/employeeportal.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
-import { EmployeesurveyComponent } from './employeesurvey/employeesurvey.component';
 
 const routes: Routes = [
     {path:'dashboard',component:DashboardComponent},
@@ -19,7 +18,6 @@ const routes: Routes = [
     {path:'ViewResponse', component:ViewResponseComponent},
     {path:'sidebar', component:SidebarComponent},
     {path:'emplogin', component:EmployeeloginComponent},
-    {path:'survey', component:EmployeesurveyComponent},
     {path:'AdminLogin',component:AdminloginComponent},
     {path:'emp-portal',component:EmployeeportalComponent}
 ];

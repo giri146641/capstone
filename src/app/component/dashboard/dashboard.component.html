@@ -18,7 +18,7 @@
       </nav>
 
       <nav class="navbar">
-        <input class="form-control" type="text" name="name" [(ngModel)] = "name" (ngModelChange)="Search()"placeholder="enter name">
+        <input class="form-control" type="text" name="name" [(ngModel)] = "namee" (ngModelChange)="Search()"placeholder="enter name">
       </nav>
 
 
@@ -166,7 +166,7 @@
               Upload csv for Employee Details
             </div>
             <div class="card-body">
-              <input type="file" #csvReader name="Upload CSV" (change)="fileChangeListener($event)" id="txtFileUpload" accept=".csv" />
+              <input type="file" #csvReader name="Upload CSV" (change)="fileChangeListener($event)" (change)="getFile($event)" id="txtFileUpload" accept=".csv" />
             </div>
           </div>
         </div>
@@ -174,7 +174,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" (click)="uploadEmployee()" data-bs-dismiss="modal">Upload</button>
+        <button type="submit" class="btn btn-primary" (click)="uploadEmployee()" (click)="submitData()" data-bs-dismiss="modal">Upload</button>
       </div>
     </div>
   </div>

@@ -15,7 +15,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { EmployeeloginComponent } from './employeelogin/employeelogin.component';
 import { EmployeeportalComponent } from './employeeportal/employeeportal.component';
-import { EmployeesurveyComponent } from './employeesurvey/employeesurvey.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,6 @@ import { EmployeesurveyComponent } from './employeesurvey/employeesurvey.compone
     AdminloginComponent,
     EmployeeloginComponent,
     EmployeeportalComponent,
-    EmployeesurveyComponent,
   ],
   imports: [
     BrowserModule,

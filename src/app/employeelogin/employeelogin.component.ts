@@ -25,6 +25,6 @@ export class EmployeeloginComponent implements OnInit {
   }
 
 adminLogin(){
-  this.router.navigateByUrl('AdminLogin');
+  this.router.navigateByUrl('');
 }
 }

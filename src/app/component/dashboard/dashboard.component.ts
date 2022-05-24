@@ -8,6 +8,8 @@ import { EmployeeService } from 'src/app/service/employee.service';
 import { EmpUploadService } from 'src/app/service/emp-upload.service';
 import { EmployeeDetails } from 'src/app/model/EmployeeDetails';
 import { Employee } from 'src/app/model/employee';
+import { HttpClient } from '@angular/common/http';
+import { CsvFile } from 'src/app/model/CsvFile';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,17 +18,19 @@ import { Employee } from 'src/app/model/employee';
 })
 export class DashboardComponent implements OnInit {
 
+  name : string="";
+  filee: any;
   orgDetail!: FormGroup;
   orgObj : Organization = new Organization();
   orgList : Organization[] = []; 
   public records: any[] = [];
   @ViewChild('csvReader') csvReader: any;
-  name : any;
+  namee : any;
   csvRecords: any=[];
   header: boolean = true;
   empList: Employee[]=[];
   
-  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService ,private route: Router,private ngxCsvParser: NgxCsvParser,private empService : EmployeeService,private empUpload : EmpUploadService) { 
+  constructor(private formBuilder: FormBuilder, private orgService: OrganizationService ,private route: Router,private ngxCsvParser: NgxCsvParser,private empService : EmployeeService,private empUpload : EmpUploadService,private http:HttpClient) { 
     this.orgList = [],
     this.getAllOrganization()
   }
@@ -119,7 +123,7 @@ export class DashboardComponent implements OnInit {
       this.ngOnInit()
     } else {
       this.orgList = this.orgList.filter(res =>{
-        return res.organizationName.toLowerCase().match(this.name.toLocaleLowerCase());
+        return res.organizationName.toLowerCase().match(this.namee.toLocaleLowerCase());
       } ) 
     }
   }
@@ -166,5 +170,24 @@ export class DashboardComponent implements OnInit {
       console.log(err);
     });
   }
+ }
+
+
+ getFile(event:any){
+   this.filee = event.target.files[0];
+   console.log('file',this.filee);
+ }
+
+ submitData(){
+
+  let formData = new FormData();
+  formData.set('name',this.name);
+  formData.set('file',this.filee);
+
+  // submit this data in Api
+
+  this.http
+  .post('https://localhost:7183/api/EmployeeCsv/upload',formData)
+  .subscribe((response)=>{});
  }
 }
