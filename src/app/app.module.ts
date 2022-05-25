@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import {HttpClientModule} from '@angular/common/http';
 import { EmpInfoComponent } from './emp-info/emp-info.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { SurveySummaryComponent } from './survey-summary/survey-summary.component';
 import { ViewResponseComponent } from './view-response/view-response.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { EmployeeloginComponent } from './employeelogin/employeelogin.component';
+import { EmployeeportalComponent } from './employeeportal/employeeportal.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +25,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     SurveySummaryComponent,
     ViewResponseComponent,
     SidebarComponent,
+    AdminloginComponent,
+    EmployeeloginComponent,
+    EmployeeportalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     Ng2SearchPipeModule,
     FormsModule
   ],

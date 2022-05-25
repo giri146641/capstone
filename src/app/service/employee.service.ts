@@ -7,15 +7,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
+  
 
   getEmpURL : string;
 
   constructor(private http: HttpClient) { 
-
-    this.getEmpURL = 'http://localhost:3000/orgList'
+    this.getEmpURL = 'https://localhost:7183/api/EmployeeDetails/GetAllEmployees'
   }
 
-    getAllEmployee(): Observable<Employee[]>{
-    return this.http.get<Employee[]>(this.getEmpURL);
+
+  getAllEmployee(id: number): Observable<Employee[]>{
+    return this.http.get<Employee[]>(this.getEmpURL+'/'+id);
    }
 }
