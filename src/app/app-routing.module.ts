@@ -21,7 +21,8 @@ const routes: Routes = [
     {path:'emplogin', component:EmployeeloginComponent},
     {path:'',component:AdminloginComponent},
     {path:'emp-portal',component:EmployeeportalComponent},
-    {path:'feedback',component:EmployeefeedbackComponent}
+    {path:'feedback',component:EmployeefeedbackComponent},
+    {path:'admin',component:AdminloginComponent}
 ];
 
 @NgModule({

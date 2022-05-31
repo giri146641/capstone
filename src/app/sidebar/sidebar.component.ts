@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 OrgInfo(){
-    this.route.navigateByUrl('dashboard');
+    this.route.navigateByUrl('admin');
   }
   SurveySummary(){
     this.route.navigateByUrl('SurveySummary');
