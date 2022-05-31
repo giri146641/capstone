@@ -21,7 +21,7 @@ password: string | undefined;
   login() : void {
     console.log(this.username);
     if(this.username == 'admin' && this.password == 'admin'){
-     this.router.navigate(["adminDashboard"]);
+     this.router.navigateByUrl('/dashboard');
     }
     else {
       alert("Invalid credentials");

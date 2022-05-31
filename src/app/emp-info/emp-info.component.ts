@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../model/employee';
 import { Organization } from '../model/organization';
 import { EmployeeService } from '../service/employee.service';
+import { employeeResponse } from '../model/employee';
 
 @Component({
   selector: 'app-emp-info',
@@ -12,6 +13,7 @@ import { EmployeeService } from '../service/employee.service';
 export class EmpInfoComponent implements OnInit {
 
   empList : Employee[] = [];
+  responseList : employeeResponse[] = [];
   empObj : Employee = new Employee();
   empStatus: string='';
   id: any;

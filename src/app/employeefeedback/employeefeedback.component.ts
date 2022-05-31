@@ -8,10 +8,10 @@ import { AnswersModel } from '../models/EmployeeResponse';
 
 @Component({
   selector: 'app-employeeportal',
-  templateUrl: './employeeportal.component.html',
-  styleUrls: ['./employeeportal.component.css']
+  templateUrl: './employeefeedback.component.html',
+  styleUrls: ['./employeefeedback.component.css']
 })
-export class EmployeeportalComponent implements OnInit {
+export class EmployeefeedbackComponent implements OnInit {
   form: FormGroup;
   employeeResponse: any;
   questionData: any;
@@ -55,12 +55,12 @@ export class EmployeeportalComponent implements OnInit {
     this.empdetails.getQuestions().subscribe(que => {
       this.questionData = que;
       this.questionData.forEach((ques: { questionId: any; }) => {
-        //console.log(ques.questionId);
+        console.log(ques.questionId);
         for (let i = 0; i < 5; i++) {
           if (ques.questionId == i) {
             this.empdetails.checkEmployeeResponseById(ques.questionId).subscribe(answer => {
               this.selectedValue = answer;
-              //console.log(this.selectedValue);
+              console.log(this.selectedValue);
 
             })
 
@@ -106,34 +106,6 @@ export class EmployeeportalComponent implements OnInit {
       { answerId: ['12'], answer: 'Good', is_selected: false },
       { answerId: ['13'], answer: 'VeryGood', is_selected: false },
       { answerId: ['14'], answer: 'Excellent', is_selected: false }]
-    },
-    {
-      question: [{ question_value: 'In which region our company need to  improve ,any ideas or suggestions?', questionId: 6, questionsType: 'text' }], answers: [{ answer: [''] },
-      ]
-    },
-    {
-      question: [{ question_value: 'How do you prefer to receive feedback about your work from your team mates or manager?', questionId: 7, questionsType: 'radio' }], answers: [{ answerId: ['16'], answer: 'Average', is_selected: false },
-      { answerId: ['17'], answer: 'Good', is_selected: false },
-      { answerId: ['18'], answer: 'VeryGood', is_selected: false },
-      { answerId: ['19'], answer: 'Excellent', is_selected: false }]
-    },
-    {
-      question: [{ question_value: 'What are you feeling about the company direction?', questionId: 8, questionsType: 'radio' }], answers: [{ answerId: ['20'], answer: 'Average', is_selected: false },
-      { answerId: ['21'], answer: 'Good', is_selected: false },
-      { answerId: ['22'], answer: 'VeryGood', is_selected: false },
-      { answerId: ['23'], answer: 'Excellent', is_selected: false }]
-    },
-    {
-      question: [{ question_value: 'What do you love the most about your job currently?', questionId: 9, questionsType: 'checkbox' }], answers: [{ answerId: ['24'], answer: 'Time Maintainence', is_selected: false },
-      { answerId: ['25'], answer: 'Work Culture', is_selected: false },
-      { answerId: ['26'], answer: 'Team Mates', is_selected: false },
-      { answerId: ['27'], answer: 'Coordination with team', is_selected: false }]
-    },
-    {
-      question: [{ question_value: 'What Do you feel that our contribute to the companys goals?', questionId: 10, questionsType: 'radio' }], answers: [{ answerId: ['28'], answer: 'Average', is_selected: false },
-      { answerId: ['29'], answer: 'Good', is_selected: false },
-      { answerId: ['30'], answer: 'VeryGood', is_selected: false },
-      { answerId: ['31'], answer: 'Excellent', is_selected: false }]
     },
   ];
   loading: boolean = true;
@@ -196,7 +168,7 @@ export class EmployeeportalComponent implements OnInit {
           question.answers.forEach(
             answer => {
               if (answer.is_selected) {
-                this.selectedValue = answer.answerId;
+                this.selectedValue = answer.answerId
               }
 
             }
@@ -224,12 +196,12 @@ export class EmployeeportalComponent implements OnInit {
 
         user.answerId = this.selectedValue;
 
-        console.log(user);
+        console.log(JSON.stringify(user));
         this.response.EmployeeResponse(user)
           .subscribe(
             res => {
-              console.log("Submission is successfull");
-              this.route.navigateByUrl('/emplogin');
+              alert("Submission is successfull");
+              this.route.navigateByUrl('/employeelogin');
               console.log(res);
             },
             error => {

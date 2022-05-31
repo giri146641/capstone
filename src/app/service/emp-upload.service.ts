@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
-import { EmployeeDetails } from '../model/EmployeeDetails';
-
+import { EmployeeDetail } from '../models/EmployeeDetails';
 @Injectable({
 
   providedIn: 'root'
@@ -12,9 +11,9 @@ import { EmployeeDetails } from '../model/EmployeeDetails';
 
 export class EmpUploadService {
 
-  private currentUserSubject: BehaviorSubject<EmployeeDetails>;
+  private currentUserSubject: BehaviorSubject<EmployeeDetail>;
 
-  public currentUser: Observable<EmployeeDetails>;
+  public currentUser: Observable<EmployeeDetail>;
 
 constructor(private http: HttpClient) {
 
@@ -22,13 +21,13 @@ constructor(private http: HttpClient) {
 
  let test= c!=null ?JSON.parse (c):'';
 
- this.currentUserSubject = new BehaviorSubject<EmployeeDetails>(test);
+ this.currentUserSubject = new BehaviorSubject<EmployeeDetail>(test);
 
  this.currentUser = this.currentUserSubject.asObservable();
 
 }
 
-public get currentUserValue(): EmployeeDetails {
+public get currentUserValue(): EmployeeDetail {
 
  return this.currentUserSubject.value;
 
@@ -36,13 +35,13 @@ public get currentUserValue(): EmployeeDetails {
 
 
 
-  EmployeeDetails(details: EmployeeDetails) {
+  EmployeeDetails(details: EmployeeDetail) {
 
     return this.http.post<any>("https://localhost:7183/api/EmployeeDetails",details)
 
     .pipe(map(userData => {
 
-      let user=new EmployeeDetails();
+      let user=new EmployeeDetail();
 
 
     user.username = userData.username;
@@ -65,7 +64,7 @@ public get currentUserValue(): EmployeeDetails {
 
     user.designation = userData.designation;
 
-    user.organizationName = userData.organizationName;
+    user.organizationNumber = userData.organizationName;
 
     return user;
 

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 import { EmployeeService } from 'src/app/service/employee.service';
 import { EmpUploadService } from 'src/app/service/emp-upload.service';
-import { EmployeeDetails } from 'src/app/model/EmployeeDetails';
+import { EmployeeDetail } from 'src/app/models/EmployeeDetails';
 import { Employee } from 'src/app/model/employee';
 import { HttpClient } from '@angular/common/http';
 import { CsvFile } from 'src/app/model/CsvFile';
@@ -148,7 +148,7 @@ export class DashboardComponent implements OnInit {
   }
 
   uploadEmployee() {
-    let user = new EmployeeDetails(); 
+    let user = new EmployeeDetail(); 
     console.log('n=',this.csvRecords.length);
     for (let i = 0; i < this.csvRecords.length; i++){
     user.city = this.csvRecords[i].City;
@@ -158,7 +158,7 @@ export class DashboardComponent implements OnInit {
     user.designation = this.csvRecords[i].Degisnation;
     user.employeeEmail = this.csvRecords[i].EmployeeEmail;
     user.gender = this.csvRecords[i].Gender;
-    user.organizationName = this.csvRecords[i].OrganizationName;
+    user.organizationNumber = this.csvRecords[i].OrganizationName;
     user.organizationNumber = this.csvRecords[i].OrganizationNumber;
     user.panNumber = this.csvRecords[i].PanNumber;
     user.password = this.csvRecords[i].Password;

@@ -39,7 +39,6 @@
         />
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form>
           <!-- Email input -->
           <div class="form-outline mb-4">
             <input
@@ -47,6 +46,7 @@
               id="form1Example13"
               class="form-control form-control-lg"
               name="username"
+              [(ngModel)]="username"
             />
             <label class="form-label" for="form1Example13">username</label>
           </div>
@@ -57,6 +57,7 @@
               type="password"
               id="form1Example23"
               class="form-control form-control-lg"
+              [(ngModel)]="password"
             />
             <label class="form-label" for="form1Example23">Password</label>
           </div>
@@ -66,7 +67,7 @@
           ></div>
 
           <!-- Submit button -->
-          <button type="submit" class="btn btn-primary btn-lg btn-block">
+          <button  class="btn btn-primary btn-lg btn-block" (click)="login()">
             Sign in
           </button>
 
@@ -77,7 +78,6 @@
           <button class="btn btn-secondary btn-lg" (click)="emplogin()">
             Login as Employee
           </button>
-        </form>
       </div>
     </div>
   </div>

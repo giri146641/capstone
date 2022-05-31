@@ -1,46 +1,53 @@
 <div class="container">
     <aside>
-       <app-sidebar></app-sidebar>
+        <app-sidebar></app-sidebar>
     </aside>
-   
-  </div>
+
+</div>
 <div class="viewResponse">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Amit's Response</a>
+                <a class="navbar-brand" href="#"></a>
             </div>
         </nav>
-    
+
         <table class="table table-striped table-bordered ">
-    <thead>
-        <tr>
-            <th>Question</th>
-            <th>Response</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>What do you think about our company culture?</td>
-            <td>Excellent</td>
-        </tr>
-        <tr>
-            <td>What do you think about payroll?</td>
-            <td>Good</td>
-        </tr>
-        <tr>
-            <td>What do you think about our company benfites regarding insurance?</td>
-            <td>Excellent</td>
-        </tr>
-        <tr>
-            <td>What do you think about our company infrastructure?</td>
-            <td>good</td>
-        </tr>
-        <tr>
-            <td>What do you think about the cab facility in our company?</td>
-            <td>Very Good</td>
-        </tr>
-    </tbody>
+            <div *ngFor="let ques of this.questions">
+                {{ques.question1}}
+                <div *ngFor="let response of responseList">
+                    <div *ngIf="ques.questionId==1 && response.questionId==1">
+                  {{response.answerId}}
+                    </div>
+                  <div *ngIf="ques.questionId==2 && response.questionId==2">
+                    {{response.answerId}}
+                </div>
+                <div *ngIf="ques.questionId==3 && response.questionId==3">
+                    {{response.answerId}}
+                </div>
+                <div *ngIf="ques.questionId==4 && response.questionId==4">
+                    {{response.answerId}}
+                </div>
+                <div *ngIf="ques.questionId==5 && response.questionId==5">
+                    {{response.answerId}}
+                </div>
+                <div *ngIf="ques.questionId==6 && response.questionId==6">
+                    {{response.answerId}}
+                </div>
+                <div *ngIf="ques.questionId==7 && response.questionId==7">
+                    {{response.answerId}}
+                </div>
+                <div *ngIf="ques.questionId==8 && response.questionId==8">
+                    {{response.answerId}}
+                </div>
+                <div *ngIf="ques.questionId==9 && response.questionId==9">
+                    {{response.answerId}}
+                </div>
+                <div *ngIf="ques.questionId==10 && response.questionId==10">
+                    {{response.answerId}}
+                </div>
+                </div>
+            </div>
         </table>
-        </div>
+    </div>
 </div>

@@ -1,8 +1,105 @@
+<!-- <h2>
+        Employee Survey Form
+    </h2> -->
+    <div class="row bg-light">
+        <div class="col"></div>
+        <div class="col">
+            <div class="card" style="width: 600px; margin-top: 15px; margin-bottom: 15px" >
+                <div class="card-header bg-dark">
+                    <h5 class="card-title text-white mt-2">
+                        Employee Survey Form
+                    </h5>
+                </div>
+                <form [formGroup]="form" (ngSubmit)="submit()">
+       
+        <div *ngFor="let question of questions; let i=index">
+             <div *ngFor='let ques of question.question'> 
+                 {{i+1}}.{{ques.question_value}} 
+            <ng-container *ngIf="ques.questionsType==['radio']" >
+                <div *ngFor='let answer of question.answers;let i = index'>  
+                <input type="radio" class="form-check-input" [checked]="answer.is_selected"
+                    (click)='radioChecked(ques.questionId,answer.answerId)'>
+                <label class="form-check-label">{{answer.answer}}</label>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="ques.questionsType==['checkbox']" >
+                <div *ngFor='let answer of question.answers;let i = index'>  
+                    <input type="checkbox" class="form-check-input" [checked]="answer.is_selected" (click)='CheckBox(ques.questionId,answer.answerId)'>
+                    <label class="form-check-label">{{answer.answer}}</label>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="ques.questionsType==['text']" >
+                <div *ngFor='let answer of question.answers'>  
+                        <textarea (blur)="blurEvent($event,ques.questionId)" rows="4" style="width: 300px;"></textarea>
+                </div> 
+            </ng-container>
+            
+        </div>
+        </div>
+        <div class="card-footer text-end"><button class="btn btn-primary">save</button></div>
+        
+    </form>
+<!-- 
+                <form [formGroup]="form" (ngSubmit)="submit()">
+       
+        <div *ngFor="let question of questions; let i=index">
+             <div *ngFor='let ques of question.question'> 
+                 {{i+1}}.{{ques.question_value}} 
+            <ng-container *ngIf="ques.questionsType==['radio']" >
+                <div *ngFor='let answer of question.answers;let i = index'>  
+                <input type="radio" [checked]="answer.is_selected"
+                    (click)='radioChecked(ques.questionId,answer.answerId)'>
+                <label>{{answer.answer}}</label>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="ques.questionsType==['checkbox']" >
+                <div *ngFor='let answer of question.answers;let i = index'>  
+                    <input type="checkbox" [checked]="answer.is_selected" (click)='CheckBox(ques.questionId,answer.answerId)'>
+                    <label>{{answer.answer}}</label>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="ques.questionsType==['text']" >
+                <div *ngFor='let answer of question.answers'>  
+                        <input type="textbox" (blur)="blurEvent($event,ques.questionId)">
+                </div> 
+            </ng-container>
+            
+        </div>
+        </div>
+        <button class="btn btn-primary">save</button>
+    </form>
 
-<div class="whole">
-    <div class="form">
-        <h4 class="formText">Abcd</h4>
-        <button id="btn" class="btn btn-secondary btn-lg" type="button">
-Launch Form
-        </button>    </div>
-</div>
+                <form [formGroup]="form" (ngSubmit)="submit()">
+       
+                    <div *ngFor="let question of questions; let i=index">
+                         <div *ngFor='let ques of question.question'> 
+                             {{i+1}}.{{ques.question_value}} 
+                        <ng-container *ngIf="ques.questionsType==['radio']" >
+                            <div *ngFor='let answer of question.answers;let i = index'>  
+                            <input type="radio" [checked]="answer.is_selected"
+                                (click)='radioChecked(ques.questionId,answer.answerId)'>
+                            <label>{{answer.answer}}</label>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="ques.questionsType==['checkbox']" >
+                            <div *ngFor='let answer of question.answers;let i = index'>  
+                                <input type="checkbox" [checked]="answer.is_selected" (click)='CheckBox(ques.questionId,answer.answerId)'>
+                                <label>{{answer.answer}}</label>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="ques.questionsType==['text']" >
+                            <div *ngFor='let answer of question.answers'>  
+                                    <input type="textbox" (blur)="blurEvent($event,ques.questionId)">
+                            </div> 
+                        </ng-container>
+                        
+                    </div>
+                    </div>
+                    <button class="btn btn-primary">save</button>
+                </form> -->
+            
+            </div>
+        </div>
+    <div class="col"></div>
+    </div>
+    

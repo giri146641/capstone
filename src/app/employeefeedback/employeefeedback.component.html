@@ -1,0 +1,37 @@
+<h2>
+    Employee Survey Form
+</h2>
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
+<form [formGroup]="form" (ngSubmit)="submit()">
+   
+    <div *ngFor="let question of questions; let i=index">
+         <div *ngFor='let ques of question.question'> 
+             {{i+1}}.{{ques.question_value}} 
+        <ng-container *ngIf="ques.questionsType==['radio']" >
+            <div *ngFor='let answer of question.answers;let i = index'>  
+            <input type="radio" [checked]="answer.is_selected"
+                (click)='radioChecked(ques.questionId,answer.answerId)'>
+            <label>{{answer.answer}}</label>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="ques.questionsType==['checkbox']" >
+            <div *ngFor='let answer of question.answers;let i = index'>  
+                <input type="checkbox" [checked]="answer.is_selected" (click)='CheckBox(ques.questionId,answer.answerId)'>
+                <label>{{answer.answer}}</label>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="ques.questionsType==['text']" >
+            <div *ngFor='let answer of question.answers'>  
+                    <input type="textbox" (blur)="blurEvent($event,ques.questionId)">
+            </div> 
+        </ng-container>
+        
+    </div>
+    </div>
+    <button class="btn btn-primary">save</button>
+</form>
+</div>
+<div class="col"></div>
+</div>

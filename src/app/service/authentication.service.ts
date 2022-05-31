@@ -2,21 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EmployeeDetails } from '../model/EmployeeDetails';
-
+import { EmployeeDetail } from '../models/EmployeeDetails';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<EmployeeDetails>;
-    public currentUser: Observable<EmployeeDetails>;
+    private currentUserSubject: BehaviorSubject<EmployeeDetail>;
+    public currentUser: Observable<EmployeeDetail>;
 
     constructor(private http: HttpClient) {
         let c=localStorage.getItem('currentUser');
         let test= c!=null ?JSON.parse (c):'';
-        this.currentUserSubject = new BehaviorSubject<EmployeeDetails>(test);
+        this.currentUserSubject = new BehaviorSubject<EmployeeDetail>(test);
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    public get currentUserValue(): EmployeeDetails {
+    public get currentUserValue(): EmployeeDetail {
         return this.currentUserSubject.value;
     }
 
@@ -27,7 +26,7 @@ export class AuthenticationService {
           "password": password
         })
             .pipe(map(user => {
-                let us=new EmployeeDetails();
+                let us=new EmployeeDetail();
                 us.userId=user.userId;
                 us.username=user.username;
                 us.password=user.password;
@@ -53,7 +52,7 @@ export class AuthenticationService {
         // remove user from local storage and set current user to null
         localStorage.removeItem('currentUser');
 
-         this.currentUserSubject.next(new EmployeeDetails());
+         this.currentUserSubject.next(new EmployeeDetail());
     }
 
    
